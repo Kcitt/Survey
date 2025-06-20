@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Authority Panel</title>
+  <link rel="stylesheet" href="project2authority.css">
+</head>
+<body>
+
+  <!-- Top Buttons -->
+  <div class="a-tags">
+    <button class="a-storage" data-count="0">Storage</button>
+    <button class="a-complaint" data-count="0">Complaint</button>
+    <button class="a-request" data-count="0">Request</button>
+    <button class="a-compliment" data-count="0">Compliment</button>
+    <button class="a-random" data-count="0">Random</button>
+  </div>
+
+  <!-- Complaint Section -->
+  <div id="section-complaint" class="section" style="display:none;">
+    <h2>Complaint</h2>
+    <div class="complaint-content">
+      <!-- Complaint data here -->
+      <button class="a-storage">Put into Storage</button>
+      <button class="a-next">Next Complaint</button>
+      <button class="a-cancel">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Request Section -->
+  <div id="section-request" class="section" style="display:none;">
+    <h2>Request</h2>
+    <div class="request-content">
+      <!-- Request data here -->
+      <button class="a-storage">Put into Storage</button>
+      <button class="a-next">Next Request</button>
+      <button class="a-cancel">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Compliment Section -->
+  <div id="section-compliment" class="section" style="display:none;">
+    <h2>Compliment</h2>
+    <div class="compliment-content">
+      <!-- Compliment data here -->
+      <button class="a-storage">Put into Storage</button>
+      <button class="a-next">Next Compliment</button>
+      <button class="a-cancel">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Random Section -->
+  <div id="section-random" class="section" style="display:none;">
+    <h2>Random</h2>
+    <div class="random-content">
+      <div class="tag-label">[Tag Type]</div>
+      <button class="a-storage">Put into Storage</button>
+      <button class="a-next">Next</button>
+      <button class="a-cancel">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Storage Section -->
+  <div id="section-storage" class="section" style="display:none;">
+    <h2>Storage</h2>
+    <button class="a-cancel" id="storage-cancel">Cancel</button>
+
+    <div class="storage-content">
+      <div class="storage-complaints">
+        <h3>Complaints</h3>
+        <div class="complaint-buttons">
+          <button class="a-cancel" id="complaint-cancel">Cancel</button>
+          <button class="a-storage" id="complaint-storage">Put into Storage</button>
+          <button class="a-next" id="complaint-next">Next Complaint</button>
+        </div>
+      </div>
+
+      <div class="storage-request">
+        <h3>Requests</h3>
+        <div class="request-buttons">
+          <button class="a-cancel" id="request-cancel">Cancel</button>
+          <button class="a-storage" id="request-storage">Put into Storage</button>
+          <button class="a-next" id="request-next">Next Request</button>
+        </div>
+      </div>
+
+      <div class="storage-compliment">
+        <h3>Compliments</h3>
+        <div class="compliment-buttons">
+          <button class="a-cancel" id="compliment-cancel">Cancel</button>
+          <button class="a-storage" id="compliment-storage">Put into Storage</button>
+          <button class="a-next" id="compliment-next">Next Compliment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="project2authority.js"></script>
+</body>
+</html>

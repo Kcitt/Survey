@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Select Tag - Complaint Site</title>
+  <link rel="stylesheet" href="project2second.css" />
+</head>
+<body>
+  <div id="page2">
+    <h1 id="main-title">Please Select your desired tag</h1>
+    <div class="tags" id="tag-buttons">
+      <button data-tag="complaint">Complaint</button>
+      <button data-tag="request">Request</button>
+      <button data-tag="compliment">Compliment</button>
+    </div>
+
+    <div id="sections-container"></div>
+
+    <div id="tag-popup" style="display:none; position:fixed; top:50%; left:50%; transform: translate(-50%, -50%);
+      background:#002200; padding:20px; border-radius:12px; box-shadow: 0 0 15px #00FF9F; z-index:1000; color:#00FF9F;">
+      <h3>Select a tag to add</h3>
+      <button class="popup-tag-btn" data-tag="complaint">Complaint</button>
+      <button class="popup-tag-btn" data-tag="request">Request</button>
+      <button class="popup-tag-btn" data-tag="compliment">Compliment</button>
+      <button id="popup-cancel">Cancel</button>
+    </div>
+  </div>
+
+  <script src="project2second.js"></script>
+</body>
+</html>

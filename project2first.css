@@ -1,0 +1,142 @@
+/* Index First Page */
+* {
+	margin: 0%;
+	padding: 0%;
+}
+
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+body {
+  background-image: url('https://raw.githubusercontent.com/Kcitt/Complaint-and-Request-Site/main/Background_picture.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Download some fonts */
+h1 {
+	text-align: center;
+	font-family: serif;
+	margin-bottom: 10px;
+	color: #00FF9F;
+	text-shadow:
+		1px 1px 2px #000000,
+		0 0 10px #d1c752,
+		0 0 20px #bbaa33;
+}
+
+h2 {
+	text-align: center;
+	margin-bottom: 10px;
+	color: #00FF9F;
+	text-shadow:
+		1px 1px 2px #000000,   /* Black outline */
+		0 0 4px #888888,       /* Soft silver outer glow */
+		0 0 8px #aaaaaa;
+}
+
+h3 {
+	text-align: center;
+	margin-bottom: 10px;
+	color: 40E0D0;
+	color: #00FF9F;
+	text-shadow:
+		1px 1px 2px #000000,   /* Black outline */
+		0 0 4px #888888,       /* Soft silver outer glow */
+		0 0 8px #aaaaaa;
+}
+
+.table-rules {
+	width: fit-content;
+	margin: 0 auto;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+.table-rules td {
+	padding: 0px 10px;
+	vertical-align: middle;
+	margin: 0 10px;
+}
+
+.accept button {
+	border: none;
+	padding: 10px 20px;
+	font-weight: bold;
+	border-radius: 8px;
+	cursor: pointer;
+	background-color: #FF4500; /* Orange-red */
+	color: #F0FFFF;
+	box-shadow:
+		0 0 5px #FFD700,
+		0 0 10px #FFA500,
+		0 0 20px #FF4500;
+
+  transition: all 0.3s ease;
+}
+
+.accept button:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 0 10px #00FF9F,
+    0 0 20px #00cc88,
+    0 0 30px #009966;
+}
+
+h4 {
+	text-align: center;
+	border: 3px solid #FF4500;
+	background: transparent;
+	box-shadow: 
+		0 0 5px #f5e960,
+		0 0 10px #d1c752,
+		0 0 20px #bbaa33;
+	margin: 0% !important;
+	padding: 5px 10px;
+	color: #F0FFFF;
+}
+
+#continue-btn {
+	justify-content: center;
+	z-index: 1;
+	display: block;
+	margin: 0 auto;
+	color: #FF4500;
+	background-color: #00FF9F;
+	box-shadow:
+		1px 1px 2px #000000,   /* Black outline */
+		0 0 4px #888888,       /* Soft silver outer glow */
+		0 0 8px #aaaaaa;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#continue-btn:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 0 10px #00FF9F,
+    0 0 20px #00cc88,
+    0 0 30px #009966;
+}
+
+/* Optional: make the popup look nice */
+.rule-alert {
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: none;
+}
+

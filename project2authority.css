@@ -1,0 +1,124 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+body {
+  background-image: url('https://raw.githubusercontent.com/Kcitt/Complaint-and-Request-Site/main/Background_picture.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+/* Tag buttons at the top */
+.a-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.a-tags button {
+  position: relative;
+  padding: 10px 20px;
+  padding-right: 35px; /* space for counter */
+  border: none;
+  border-radius: 5px;
+  background-color: #00FF9F;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  transition: background-color 0.2s;
+}
+
+.a-tags button:hover {
+  background-color: #00c37d;
+}
+
+/* Bubble counters */
+.a-tags button::after {
+  content: attr(data-count);
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  background: white;
+  color: black;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  box-shadow: 0 0 3px #000000;
+}
+
+/* Generic section styling */
+.section {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  margin: 10px 0;
+  display: none;
+}
+
+/* Headers inside sections */
+.section h2, .section h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+/* Buttons inside sections */
+.section button {
+  margin: 10px 5px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  background-color: #00FF9F;
+  color: black;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  transition: background-color 0.2s;
+}
+
+.section button:hover {
+  background-color: #00c37d;
+}
+
+/* Content blocks */
+.complaint-content,
+.request-content,
+.compliment-content,
+.random-content,
+.storage-content {
+  margin-top: 15px;
+  text-align: center;
+}
+
+/* Hide storage sub-sections by default */
+.storage-complaints,
+.storage-request,
+.storage-compliment {
+  display: none;
+  margin-top: 10px;
+}
+
+/* Random tag label */
+.tag-label {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #555;
+}
