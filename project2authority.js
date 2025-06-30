@@ -234,30 +234,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Render a random submission from all lists
-function renderRandom() {
-  const container = document.querySelector('.random-content');
-  container.innerHTML = '';
+  function renderRandom() {
+    const container = document.querySelector('.random-content');
+    container.innerHTML = '';
 
-  let allItems = [
-    ...complaints.map(c => ({ type: 'complaint', text: c })),
-    ...requests.map(r => ({ type: 'request', text: r })),
-    ...compliments.map(co => ({ type: 'compliment', text: co }))
-  ];
+    let allItems = [
+      ...complaints.map(c => ({ type: 'complaint', text: c })),
+      ...requests.map(r => ({ type: 'request', text: r })),
+      ...compliments.map(co => ({ type: 'compliment', text: co }))
+    ];
 
-  if (allItems.length === 0) {
-    container.innerHTML = `<p>No submissions available.</p><button class="a-cancel">Back</button>`;
-    container.querySelector('.a-cancel').addEventListener('click', () => {
-      hideAllSections();
-      showAllTags();
-    });
-    return;
-  }
-
-  let index = 0;
-
-  function display() {
     if (allItems.length === 0) {
-      container.innerHTML = `<p>No more submissions available.</p><button class="a-cancel">Back</button>`;
+      container.innerHTML = `<p>No submissions available.</p><button class="a-cancel">Back</button>`;
       container.querySelector('.a-cancel').addEventListener('click', () => {
         hideAllSections();
         showAllTags();
@@ -265,43 +253,56 @@ function renderRandom() {
       return;
     }
 
-    index = Math.floor(Math.random() * allItems.length);
-    let currentItem = allItems[index];
+    let index = 0;
 
-    container.innerHTML = `
-      <p><strong>${currentItem.type.charAt(0).toUpperCase() + currentItem.type.slice(1)}:</strong> ${currentItem.text}</p>
-      <button class="a-storage">Put into Storage</button>
-      <button class="a-next">Next Random</button>
-      <button class="a-cancel">Cancel</button>
-    `;
+    function display() {
+      if (allItems.length === 0) {
+        container.innerHTML = `<p>No more submissions available.</p><button class="a-cancel">Back</button>`;
+        container.querySelector('.a-cancel').addEventListener('click', () => {
+          hideAllSections();
+          showAllTags();
+        });
+        return;
+      }
 
-    container.querySelector('.a-storage').addEventListener('click', () => {
-      storage[currentItem.type + 's'].push(currentItem.text);
+      index = Math.floor(Math.random() * allItems.length);
+      let currentItem = allItems[index];
 
-      // Remove from original list
-      if (currentItem.type === 'complaint') complaints.splice(complaints.indexOf(currentItem.text), 1);
-      else if (currentItem.type === 'request') requests.splice(requests.indexOf(currentItem.text), 1);
-      else if (currentItem.type === 'compliment') compliments.splice(compliments.indexOf(currentItem.text), 1);
+      container.innerHTML = `
+        <p><strong>${currentItem.type.charAt(0).toUpperCase() + currentItem.type.slice(1)}:</strong> ${currentItem.text}</p>
+        <button class="a-storage">Put into Storage</button>
+        <button class="a-next">Next Random</button>
+        <button class="a-cancel">Cancel</button>
+      `;
 
-      saveAllData();
-      updateVisibleTags();
-      updateCounts();
+      container.querySelector('.a-storage').addEventListener('click', () => {
+        storage[currentItem.type + 's'].push(currentItem.text);
 
-      // Remove the current item from allItems
-      allItems.splice(index, 1);
+        // Remove from original list
+        if (currentItem.type === 'complaint') complaints.splice(complaints.indexOf(currentItem.text), 1);
+        else if (currentItem.type === 'request') requests.splice(requests.indexOf(currentItem.text), 1);
+        else if (currentItem.type === 'compliment') compliments.splice(compliments.indexOf(currentItem.text), 1);
 
-      display();
-    });
+        saveAllData();
+        updateVisibleTags();
+        updateCounts();
 
-    container.querySelector('.a-next').addEventListener('click', () => {
-      display();
-    });
+        // Remove the current item from allItems
+        allItems.splice(index, 1);
 
-    container.querySelector('.a-cancel').addEventListener('click', () => {
-      hideAllSections();
-      showAllTags();
-    });
+        display();
+      });
+
+      container.querySelector('.a-next').addEventListener('click', () => {
+        display();
+      });
+
+      container.querySelector('.a-cancel').addEventListener('click', () => {
+        hideAllSections();
+        showAllTags();
+      });
+    }
+
+    display();
   }
-
-  display();
-}
+});
