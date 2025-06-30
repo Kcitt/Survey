@@ -157,6 +157,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
   showMainAndTags();
 });
-
-
-
