@@ -80,6 +80,11 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Please enter some text before submitting.');
         return;
       }
+
+      submitBtn.disabled = true;
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Submitting...';
+
       // Save to localStorage
       const savedData = JSON.parse(localStorage.getItem('userSubmissions')) || {
         complaints: [],
@@ -94,27 +99,29 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('userSubmissions', JSON.stringify(savedData));
 
       fetch("https://script.google.com/macros/s/AKfycbz5aWfk1PjA1QSIwiB7SWdQym0FKSWNU7SS928SKFI/dev", {
-  method: "POST",
-  body: JSON.stringify({
-    tag: tag,
-    text: value
-  }),
-  headers: {
-    "Content-Type": "application/json"
-  }
-})
-.then(res => res.json())
-.then(data => {
-  console.log("Sent to Google Sheet:", data);
-})
-.catch(error => {
-  console.error("Error sending to Google Sheet:", error);
-});
-
-
-      alert(`Submitted your ${tag}:\n${value}`);
-
-      removeInputSection(sectionDiv);
+        method: "POST",
+        body: JSON.stringify({
+          tag: tag,
+          text: value
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log("Sent to Google Sheet:", data);
+        alert(`Submitted your ${tag}:\n${value}`);
+        removeInputSection(sectionDiv);
+      })
+      .catch(error => {
+        console.error("Error sending to Google Sheet:", error);
+        alert('Failed to send data. Please try again.');
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      });
     });
 
     cancelBtn.addEventListener('click', () => {
