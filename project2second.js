@@ -150,14 +150,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
   showMainAndTags();
 });
-
-fetch("https://script.google.com/macros/s/AKf...your-web-app-url.../exec", {
-  method: "POST",
-  body: JSON.stringify({
-    tag: "complaint",
-    text: "This is my complaint text"
-  }),
-  headers: {
-    "Content-Type": "application/json"
-  }
-});
