@@ -93,6 +93,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
       localStorage.setItem('userSubmissions', JSON.stringify(savedData));
 
+      fetch("https://script.google.com/macros/s/YOUR_WEB_APP_URL_HERE/exec", {
+  method: "POST",
+  body: JSON.stringify({
+    tag: tag,
+    text: value
+  }),
+  headers: {
+    "Content-Type": "application/json"
+  }
+})
+.then(res => res.json())
+.then(data => {
+  console.log("Sent to Google Sheet:", data);
+})
+.catch(error => {
+  console.error("Error sending to Google Sheet:", error);
+});
+
+
       alert(`Submitted your ${tag}:\n${value}`);
 
       removeInputSection(sectionDiv);
