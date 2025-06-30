@@ -160,25 +160,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-
-// At the very end of your authority page JS
-function saveToGoogleSheets() {
-  const payload = {
-    complaints: ['Too much noise', 'Litter on the street'],
-    requests: ['More trees'],
-    compliments: ['Great park renovation!']
-  };
-
-  fetch('https://script.google.com/macros/s/AKfycbwkKpbnsNmnAiYsMB2LwjLuFC9nm15zL07IKHfot8tNjFvREG5f4-VniN2n7OUIpO04/exec', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  })
-  .then(res => res.json())
-  .then(data => console.log('Success:', data))
-  .catch(err => console.error('Error:', err));
-}
-
-// Call it once to test
-saveToGoogleSheets();
