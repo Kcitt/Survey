@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   // *** Google Sheets URL ***
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbyY2HZcvIbX6IMkahgxmq6G0Wc3ROSaJPwDSgvMXNiD14Vv-a9t2m268N2_QuKQ1PCc/exec'; // <-- replace with your actual URL
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbwaqQHxFxxmbKzNgWJ_zNP-8Cu8EVqzjNsdSaAvqaXyq7NmQiWxu0Wg2TzOgcP_xSpN/exec'; // <-- replace with your actual URL
 
   // Initialize variables (will be overwritten by fetch)
   let complaints = [];
