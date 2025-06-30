@@ -273,3 +273,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         index = Math.floor(Math
+
+        fetch("https://script.google.com/macros/s/AKf...your-web-app-url.../exec")
+  .then(res => res.json())
+  .then(data => {
+    // data is the array of submitted items
+    displaySubmissions(data); // <-- your own function to update the HTML
+  });
