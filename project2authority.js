@@ -1,30 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Seed initial data only if nothing is stored yet
-  if (!localStorage.getItem('userSubmissions')) {
-    localStorage.setItem('userSubmissions', JSON.stringify({
-      complaints: ['Complaint example #1', 'Complaint example #2'],
-      requests: ['Request example #1'],
-      compliments: ['Compliment example #1']
-    }));
-  }
-  if (!localStorage.getItem('userStorage')) {
-    localStorage.setItem('userStorage', JSON.stringify({
-      complaints: [],
-      requests: [],
-      compliments: []
-    }));
-  }
+  // *** Google Sheets URL ***
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbz5aWfk1PjA1QSIwiB7SWdQym0FKSWNU7SS928SKFI/dev'; // <-- replace with your actual URL
 
-  // Load saved data or defaults
-  let savedData = JSON.parse(localStorage.getItem('userSubmissions')) || { complaints: [], requests: [], compliments: [] };
+  // Initialize variables (will be overwritten by fetch)
+  let complaints = [];
+  let requests = [];
+  let compliments = [];
+
+  // Load localStorage backup data (fallback if fetch fails)
+  let savedDataBackup = JSON.parse(localStorage.getItem('userSubmissions')) || { complaints: [], requests: [], compliments: [] };
   let storage = JSON.parse(localStorage.getItem('userStorage')) || { complaints: [], requests: [], compliments: [] };
 
-  let complaints = savedData.complaints;
-  let requests = savedData.requests;
-  let compliments = savedData.compliments;
-
+  // Current index tracker
   let current = { complaint: 0, request: 0, compliment: 0 };
 
+  // Button references
   const tagButtons = {
     complaint: document.querySelector('.a-complaint'),
     request: document.querySelector('.a-request'),
@@ -67,10 +57,50 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
   }
 
+  // Save all data to localStorage and Google Sheets
   function saveAllData() {
     localStorage.setItem('userSubmissions', JSON.stringify({ complaints, requests, compliments }));
     localStorage.setItem('userStorage', JSON.stringify(storage));
+    saveToGoogleSheets(); // <-- Save remotely too
   }
+
+  // *** New: Save to Google Sheets via POST ***
+  function saveToGoogleSheets() {
+    const payload = { complaints, requests, compliments };
+    fetch(GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then(response => {
+      console.log('Saved to Google Sheets:', response);
+    })
+    .catch(err => {
+      console.error('Failed to save to Google Sheets:', err);
+    });
+  }
+
+  // *** New: Load data from Google Sheets on page load ***
+  fetch(GAS_URL)
+    .then(res => res.json())
+    .then(data => {
+      complaints = data.complaints || [];
+      requests = data.requests || [];
+      compliments = data.compliments || [];
+      updateVisibleTags();
+      updateCounts();
+      // Optionally render default view here
+    })
+    .catch(err => {
+      console.warn('Failed to fetch from Google Sheets, using localStorage fallback:', err);
+      // fallback to localStorage saved data
+      complaints = savedDataBackup.complaints.length ? savedDataBackup.complaints : ['Complaint example #1', 'Complaint example #2'];
+      requests = savedDataBackup.requests.length ? savedDataBackup.requests : ['Request example #1'];
+      compliments = savedDataBackup.compliments.length ? savedDataBackup.compliments : ['Compliment example #1'];
+      updateVisibleTags();
+      updateCounts();
+    });
 
   // Event listeners for each tag button
   tagButtons.storage.addEventListener('click', () => {
@@ -216,41 +246,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (allItems.length === 0) {
       container.innerHTML = `<p>No submissions available.</p><button class="a-cancel">Back</button>`;
-      container.querySelector('.a-cancel').addEventListener('click', () => {
-        hideAllSections();
-        showAllTags();
-      });
-      return;
-    }
-
-    let index = Math.floor(Math.random() * allItems.length);
-    let currentItem = allItems[index];
-
-    function display() {
-      container.innerHTML = `
-        <p><strong>${currentItem.type.charAt(0).toUpperCase() + currentItem.type.slice(1)}:</strong> ${currentItem.text}</p>
-        <button class="a-storage">Put into Storage</button>
-        <button class="a-next">Next Random</button>
-        <button class="a-cancel">Cancel</button>
-      `;
-
-      container.querySelector('.a-storage').addEventListener('click', () => {
-        storage[currentItem.type + 's'].push(currentItem.text);
-
-        // Remove from original list
-        if (currentItem.type === 'complaint') complaints.splice(complaints.indexOf(currentItem.text), 1);
-        else if (currentItem.type === 'request') requests.splice(requests.indexOf(currentItem.text), 1);
-        else if (currentItem.type === 'compliment') compliments.splice(compliments.indexOf(currentItem.text), 1);
-
-        saveAllData();
-        updateVisibleTags();
-        updateCounts();
-
-        // Rebuild allItems and pick new random
-        allItems = [
-          ...complaints.map(c => ({ type: 'complaint', text: c })),
-          ...requests.map(r => ({ type: 'request', text: r })),
-          ...compliments.map(co => ({ type: 'compliment', text: co }))
-        ];
-
-        if (allItems.length === 0
+      container.querySelector('.a-cancel').addEventListener('click',
