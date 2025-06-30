@@ -157,3 +157,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   showMainAndTags();
 });
+
+
+
+
+
+document.getElementById('test-fetch').addEventListener('click', () => {
+  fetch("https://script.google.com/macros/s/AKfycbwaqQHxFxxmbKzNgWJ_zNP-8Cu8EVqzjNsdSaAvqaXyq7NmQiWxu0Wg2TzOgcP_xSpN/exec", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ tag: "test", text: "Hello from test button" })
+  })
+  .then(res => res.json())
+  .then(data => alert("Success: " + JSON.stringify(data)))
+  .catch(err => alert("Error: " + err.message));
+});
