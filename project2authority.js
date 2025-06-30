@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Seed initial data for testing (remove this if you want to use your own storage)
+  // Seed initial data only if nothing is stored yet
   if (!localStorage.getItem('userSubmissions')) {
     localStorage.setItem('userSubmissions', JSON.stringify({
       complaints: ['Complaint example #1', 'Complaint example #2'],
@@ -15,29 +15,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
   }
 
-  // Load saved data or default empty arrays
-  const savedData = JSON.parse(localStorage.getItem('userSubmissions')) || {
-    complaints: [],
-    requests: [],
-    compliments: []
-  };
+  // Load saved data or defaults
+  let savedData = JSON.parse(localStorage.getItem('userSubmissions')) || { complaints: [], requests: [], compliments: [] };
+  let storage = JSON.parse(localStorage.getItem('userStorage')) || { complaints: [], requests: [], compliments: [] };
 
   let complaints = savedData.complaints;
   let requests = savedData.requests;
   let compliments = savedData.compliments;
 
-  // Storage for processed items
-  let storage = JSON.parse(localStorage.getItem('userStorage')) || {
-    complaints: [],
-    requests: [],
-    compliments: []
-  };
-
-  let current = {
-    complaint: 0,
-    request: 0,
-    compliment: 0
-  };
+  let current = { complaint: 0, request: 0, compliment: 0 };
 
   const tagButtons = {
     complaint: document.querySelector('.a-complaint'),
@@ -47,11 +33,16 @@ document.addEventListener('DOMContentLoaded', () => {
     storage: document.querySelector('.a-storage')
   };
 
+  // Utility: check if storage has anything
+  function hasStorage() {
+    return storage.complaints.length + storage.requests.length + storage.compliments.length > 0;
+  }
+
   function updateVisibleTags() {
     tagButtons.complaint.style.display = complaints.length > 0 ? 'inline-block' : 'none';
     tagButtons.request.style.display = requests.length > 0 ? 'inline-block' : 'none';
     tagButtons.compliment.style.display = compliments.length > 0 ? 'inline-block' : 'none';
-    tagButtons.random.style.display = (complaints.length + requests.length + compliments.length > 0) ? 'inline-block' : 'none';
+    tagButtons.random.style.display = (complaints.length + requests.length + compliments.length) > 0 ? 'inline-block' : 'none';
     tagButtons.storage.style.display = hasStorage() ? 'inline-block' : 'none';
   }
 
@@ -81,8 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('userStorage', JSON.stringify(storage));
   }
 
-  // Event Listeners for buttons
-
+  // Event listeners for each tag button
   tagButtons.storage.addEventListener('click', () => {
     hideAllSections();
     hideAllTags();
@@ -118,8 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderRandom();
   });
 
-  // Render Functions
-
+  // Render a single item of a given type
   function renderItem(type, list, containerClass) {
     const container = document.querySelector(`.${containerClass}`);
     container.innerHTML = '';
@@ -165,6 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Render the storage section with deletable items
   function renderStorage() {
     const container = document.querySelector('.storage-content');
     container.innerHTML = '';
@@ -213,6 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Render a random submission from all lists
   function renderRandom() {
     const container = document.querySelector('.random-content');
     container.innerHTML = '';
@@ -244,8 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
 
       container.querySelector('.a-storage').addEventListener('click', () => {
-        const typePlural = currentItem.type + 's';
-        storage[typePlural].push(currentItem.text);
+        storage[currentItem.type + 's'].push(currentItem.text);
 
         // Remove from original list
         if (currentItem.type === 'complaint') complaints.splice(complaints.indexOf(currentItem.text), 1);
@@ -263,20 +253,4 @@ document.addEventListener('DOMContentLoaded', () => {
           ...compliments.map(co => ({ type: 'compliment', text: co }))
         ];
 
-        if (allItems.length === 0) {
-          container.innerHTML = `<p>No submissions left.</p><button class="a-cancel">Back</button>`;
-          container.querySelector('.a-cancel').addEventListener('click', () => {
-            hideAllSections();
-            showAllTags();
-          });
-          return;
-        }
-
-        index = Math.floor(Math
-
-        fetch("https://script.google.com/macros/s/AKf...your-web-app-url.../exec")
-  .then(res => res.json())
-  .then(data => {
-    // data is the array of submitted items
-    displaySubmissions(data); // <-- your own function to update the HTML
-  });
+        if (allItems.length === 0
