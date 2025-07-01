@@ -2,6 +2,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // *** Google Sheets URL ***
   const GAS_URL = 'https://script.google.com/macros/s/AKfycbwaqQHxFxxmbKzNgWJ_zNP-8Cu8EVqzjNsdSaAvqaXyq7NmQiWxu0Wg2TzOgcP_xSpN/exec'; // <-- replace with your actual URL
 
+  // Gets the data submitted on the second page
+  fetch(GAS_URL)
+  .then(response => response.json())
+  .then(data => {
+    // Use the data here
+    console.log('Data from GAS:', data);
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+  });
+
   // Initialize variables (will be overwritten by fetch)
   let complaints = [];
   let requests = [];
@@ -144,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
     container.innerHTML = '';
 
     if (list.length === 0) {
-      container.innerHTML = <p>No more ${type}s.</p><button class="a-cancel">Back</button>;
+      container.innerHTML = <p>No more ${type}s.</p><button class="a-cancel" id="storage-cancel">Cancel</button>;
       container.querySelector('.a-cancel').addEventListener('click', () => {
         hideAllSections();
         showAllTags();
@@ -224,14 +235,6 @@ document.addEventListener('DOMContentLoaded', () => {
         container.appendChild(ul);
       }
     });
-
-    container.innerHTML += <button class="a-cancel-storage">Back</button>;
-
-    container.querySelector('.a-cancel-storage').addEventListener('click', () => {
-      hideAllSections();
-      showAllTags();
-    });
-  }
 
   // Render a random submission from all lists
   function renderRandom() {
