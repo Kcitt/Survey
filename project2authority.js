@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   // *** Google Sheets URL ***
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbwOCm72z-0F4jjrO8OsH9fKLyGCNaXNB6zVi3X6AvGLrkIv4gXwGJeM44d7WJ0n_hm8/exec'; // <-- replace with your actual URL
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbxnvbAXC-PPZSctjINM7s6oV3GMvDV7MUgMIv12QcJ49tnR23NcfJKtKL61AUl8WXuL/exec'; // <-- replace with your actual URL
 
   // Gets the data submitted on the second page
   fetch(GAS_URL)
