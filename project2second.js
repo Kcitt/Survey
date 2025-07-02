@@ -18,6 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
     tagButtonsDiv.style.display = 'none';
   }
 
+  function removeInputSection(sectionDiv) {
+    sectionsContainer.removeChild(sectionDiv);
+    if (sectionsContainer.querySelectorAll('.input-section').length === 0) {
+      showMainAndTags();
+    }
+  }
+
   function createInputSection(tag) {
     const currentCount = sectionsContainer.querySelectorAll('.input-section').length;
     if (currentCount >= MAX_TAGS) {
@@ -85,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const originalText = submitBtn.textContent;
       submitBtn.textContent = 'Submitting...';
 
-      // Save to localStorage
       const savedData = JSON.parse(localStorage.getItem('userSubmissions')) || {
         complaints: [],
         requests: [],
@@ -99,40 +105,28 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('userSubmissions', JSON.stringify(savedData));
 
       fetch("https://script.google.com/macros/s/AKfycbxnvbAXC-PPZSctjINM7s6oV3GMvDV7MUgMIv12QcJ49tnR23NcfJKtKL61AUl8WXuL/exec", {
-  method: "POST",
-  body: JSON.stringify({
-    tag: tag,
-    text: value
-  }),
-  headers: {
-    "Content-Type": "application/json"
-  }
-})
-.then(res => res.text())
-.then(text => {
-  console.log("🔍 Raw response from Google Apps Script:", text);
-  alert(`Response: ${text}`);
-})
-.catch(error => {
-  console.error("❌ Error sending to Google Sheet:", error);
-  alert('Failed to send data. Please try again.');
-})
-.finally(() => {
-  submitBtn.disabled = false;
-  submitBtn.textContent = originalText;
-});
-
+        method: "POST",
+        body: JSON.stringify({ tag, text: value }),
+        headers: { "Content-Type": "application/json" }
+      })
+        .then(res => res.text())
+        .then(text => {
+          console.log("🔍 Raw response from Google Apps Script:", text);
+          alert(`Response: ${text}`);
+        })
+        .catch(error => {
+          console.error("❌ Error sending to Google Sheet:", error);
+          alert('Failed to send data. Please try again.');
+        })
+        .finally(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        });
+    });
 
     cancelBtn.addEventListener('click', () => {
       removeInputSection(sectionDiv);
     });
-  
-
-  function removeInputSection(sectionDiv) {
-    sectionsContainer.removeChild(sectionDiv);
-    if (sectionsContainer.querySelectorAll('.input-section').length === 0) {
-      showMainAndTags();
-    }
   }
 
   tagButtonsDiv.querySelectorAll('button').forEach(btn => {
@@ -156,8 +150,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
   showMainAndTags();
 });
-
-
-
-
-
