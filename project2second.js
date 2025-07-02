@@ -99,21 +99,29 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('userSubmissions', JSON.stringify(savedData));
 
       fetch("https://script.google.com/macros/s/AKfycbxnvbAXC-PPZSctjINM7s6oV3GMvDV7MUgMIv12QcJ49tnR23NcfJKtKL61AUl8WXuL/exec", {
-        method: "POST",
-        body: JSON.stringify({
-          tag: tag,
-          text: value
-        }),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-      .then(res => res.json())
-      .then(data => {
-        console.log("Sent to Google Sheet:", data);
-        alert(`Submitted your ${tag}:\n${value}`);
-        removeInputSection(sectionDiv);
-      })
+  method: "POST",
+  body: JSON.stringify({
+    tag: tag,
+    text: value
+  }),
+  headers: {
+    "Content-Type": "application/json"
+  }
+})
+.then(res => res.text())
+.then(text => {
+  console.log("🔍 Raw response from Google Apps Script:", text);
+  alert(`Response: ${text}`);
+})
+.catch(error => {
+  console.error("❌ Error sending to Google Sheet:", error);
+  alert('Failed to send data. Please try again.');
+})
+.finally(() => {
+  submitBtn.disabled = false;
+  submitBtn.textContent = originalText;
+});
+
       .catch(error => {
         console.error("Error sending to Google Sheet:", error);
         alert('Failed to send data. Please try again.');
