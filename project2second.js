@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cancelBtn.addEventListener('click', () => {
       removeInputSection(sectionDiv);
     });
-  }
+  
 
   function removeInputSection(sectionDiv) {
     sectionsContainer.removeChild(sectionDiv);
