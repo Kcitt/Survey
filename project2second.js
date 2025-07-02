@@ -122,15 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
   submitBtn.textContent = originalText;
 });
 
-      .catch(error => {
-        console.error("Error sending to Google Sheet:", error);
-        alert('Failed to send data. Please try again.');
-      })
-      .finally(() => {
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
-      });
-    });
 
     cancelBtn.addEventListener('click', () => {
       removeInputSection(sectionDiv);
