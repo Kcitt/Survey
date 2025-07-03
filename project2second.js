@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       localStorage.setItem('userSubmissions', JSON.stringify(savedData));
 
-      fetch("https://script.google.com/macros/s/AKfycbwLdSMTSj9DQuEcP_s2i-GAPMbraWnFHXCysfQJoAyudwGLmKkFmt8b57-tSKQvGJuE/exec", {
+      fetch("https://script.google.com/macros/s/AKfycbwvTPMwkURDtH2DWVYJlMxyicBNNUv0gvQk9yrfhCvrbUcSP2w4Qx8G2tMKL78MPaJn/exec", {
         method: "POST",
         body: JSON.stringify({ tag, text: value }),
         headers: { "Content-Type": "application/json" }
