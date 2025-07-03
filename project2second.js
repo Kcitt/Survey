@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const params = new URLSearchParams({ tag, text: value });
 
-      fetch(`https://script.google.com/macros/s/AKfycbwaUhqd-u7I_MGZcKQYrNdb5tn5nRPqHBU7CjA2oMqb59GsIFH6mFkJndVcNPUMMz3t/exec?${params.toString()}`)
+      fetch(`https://script.google.com/macros/s/AKfycbwQ40mXjUopVaPV_GvFkVks_NGgniKjvOQ9JwXg2tGWaC6mAnl7YrUSTusmDbM2tPvJ/exec?${params.toString()}`)
         .then(res => res.json())
         .then(data => {
           console.log("✅ GET success:", data);
