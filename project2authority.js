@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbwaUhqd-u7I_MGZcKQYrNdb5tn5nRPqHBU7CjA2oMqb59GsIFH6mFkJndVcNPUMMz3t/exec';
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbwQ40mXjUopVaPV_GvFkVks_NGgniKjvOQ9JwXg2tGWaC6mAnl7YrUSTusmDbM2tPvJ/exec';
 
   let complaints = [];
   let requests = [];
