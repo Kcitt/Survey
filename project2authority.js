@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function saveToGoogleSheets() {
     fetch(GAS_URL, {
-      method: 'POST',
+      method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ complaints, requests, compliments })
     })
