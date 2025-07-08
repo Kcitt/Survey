@@ -127,9 +127,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Button: Zeigt nächsten Eintrag an
     container.querySelector('.a-next').addEventListener('click', () => {
-      current[type]++;
-      renderItem(type, list, containerClass);
+    // Aktuelles Element löschen
+    list.splice(current[type], 1);
+
+    // Wenn Index außerhalb liegt, zurück auf 0 setzen
+    if (current[type] >= list.length) current[type] = 0;
+
+    // Neue Ansicht rendern
+    renderItem(type, list, containerClass);
+
+    // UI aktualisieren
+    updateVisibleTags();
+    updateCounts();
+    saveAllData();
     });
+
 
     // Button: Abbrechen und zur Übersicht zurück
     container.querySelector('.a-cancel').addEventListener('click', () => {
