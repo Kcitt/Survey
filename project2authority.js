@@ -125,10 +125,22 @@ document.addEventListener('DOMContentLoaded', () => {
       saveAllData();
     });
 
-    // Button: Zeigt nächsten Eintrag an
     container.querySelector('.a-next').addEventListener('click', () => {
-    // Aktuelles Element löschen
-    list.splice(current[type], 1);
+    // Remove from source list first
+    if (currentItem.type === 'complaint') complaints = complaints.filter(c => c !== currentItem.text);
+    else if (currentItem.type === 'request') requests = requests.filter(r => r !== currentItem.text);
+    else if (currentItem.type === 'compliment') compliments = compliments.filter(c => c !== currentItem.text);
+
+    // Remove from the combined list
+    allItems.splice(index, 1);
+
+    saveAllData();
+    updateVisibleTags();
+    updateCounts();
+
+    // Show next random item
+    display();
+});
 
     // Wenn Index außerhalb liegt, zurück auf 0 setzen
     if (current[type] >= list.length) current[type] = 0;
