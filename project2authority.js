@@ -8,6 +8,28 @@ document.addEventListener('DOMContentLoaded', () => {
   let complaints = [];
   let requests = [];
   let compliments = [];
+  
+// 1. Load data first
+  fetch(GAS_URL)
+    .then(res => res.json())
+    .then(data => {
+      complaints = data.complaints || ['Complaint example #1'];
+      requests = data.requests || ['Request example #1'];
+      compliments = data.compliments || ['Compliment example #1'];
+    })
+    .catch(err => {
+      console.warn('Fallback:', err);
+      complaints = savedDataBackup.complaints.length ? savedDataBackup.complaints : ['Complaint example #1'];
+      requests = savedDataBackup.requests.length ? savedDataBackup.requests : ['Request example #1'];
+      compliments = savedDataBackup.compliments.length ? savedDataBackup.compliments : ['Compliment example #1'];
+    })
+    .finally(() => {
+      // 2. Setup UI after data is ready
+      updateVisibleTags();
+      updateCounts();
+      attachEventListeners(); // custom function with all your tagButtons.addEventListener() stuff
+    });
+});
 
   // Lokale Sicherungskopie aus dem Browser-Storage (Backup)
   const savedDataBackup = JSON.parse(localStorage.getItem('userSubmissions')) || { complaints: [], requests: [], compliments: [] };
@@ -321,7 +343,7 @@ document.getElementById('storage-cancel').addEventListener('click', () => {
   showAllTags();
 });
 
-  // Initialer Datenabruf – Google Sheets oder Fallback auf LocalStorage
+  /* Initialer Datenabruf – Google Sheets oder Fallback auf LocalStorage
   fetch(GAS_URL)
     .then(res => res.json())
     .then(data => {
@@ -341,4 +363,4 @@ document.getElementById('storage-cancel').addEventListener('click', () => {
       updateCounts();
     });
 
-});
+});*/
