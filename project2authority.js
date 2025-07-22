@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
     // Wenn Index außerhalb liegt, zurück auf 0 setzen
-    if (current[type] >= list.length) current[type] = 0;
+    if (current[type] >= list.length) current[type] = 0; 
 
     // Neue Ansicht rendern
     renderItem(type, list, containerClass);
@@ -152,7 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateVisibleTags();
     updateCounts();
     saveAllData();
-    });
 
 
     // Button: Abbrechen und zur Übersicht zurück
