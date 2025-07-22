@@ -188,43 +188,38 @@ types.forEach(({ key, singular }) => {
   const label = key.charAt(0).toUpperCase() + key.slice(1);
   container.innerHTML += `<h3>${label} (${entries.length})</h3>`;
 
-      if (entries.length === 0) {
-        container.innerHTML += '<p>None.</p>';
-      } else {
-        const ul = document.createElement('ul');
-        entries.forEach((entry, index) => {
-          const li = document.createElement('li');
-        li.appendChild(document.createTextNode(entry));
+  if (entries.length === 0) {
+    container.innerHTML += '<p>None.</p>';
+  } else {
+    const ul = document.createElement('ul');
 
-          const delBtn = document.createElement('button');
-          delBtn.textContent = 'Delete';
-          delBtn.style.marginLeft = '10px';
+    entries.forEach((entry, index) => {
+      const li = document.createElement('li');
+      li.appendChild(document.createTextNode(entry));
 
-          // Löscht einen Eintrag nach Bestätigung
-          delBtn.addEventListener('click', () => {
-  if (confirm('Delete this entry?')) {
-    // Find current index of this entry at click time, instead of closed-over index
-   /* const currentIndex = storage[type].indexOf(entry);
-    if (currentIndex > -1) {
-      storage[type].splice(currentIndex, 1);*/
-    storage[key].splice(index, 1);
+      const delBtn = document.createElement('button');
+      delBtn.textContent = 'Delete';
+      delBtn.style.marginLeft = '10px';
 
-      saveAllData();
-      renderStorage();
-      updateVisibleTags();
-      updateCounts();
-    }
+      // Löscht einen Eintrag nach Bestätigung
+      delBtn.addEventListener('click', () => {
+        if (confirm('Delete this entry?')) {
+          storage[key].splice(index, 1);
+          saveAllData();
+          renderStorage();
+          updateVisibleTags();
+          updateCounts();
+        }
+      });
+
+      li.appendChild(delBtn);
+      ul.appendChild(li);
+    });
+
+    container.appendChild(ul);
   }
 });
 
-
-          li.appendChild(delBtn);
-          ul.appendChild(li);
-        });
-        container.appendChild(ul);
-      }
-    });
-  }
 
   // Zeigt zufällige Beiträge aus allen Kategorien an
   function renderRandom() {
