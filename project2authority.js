@@ -185,7 +185,7 @@ types.forEach(({ key, singular }) => {
    /* const currentIndex = storage[type].indexOf(entry);
     if (currentIndex > -1) {
       storage[type].splice(currentIndex, 1);*/
-    storage[type].splice(index, 1);
+    storage[key].splice(index, 1);
 
       saveAllData();
       renderStorage();
