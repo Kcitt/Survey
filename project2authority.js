@@ -308,6 +308,12 @@ document.addEventListener('DOMContentLoaded', () => {
     renderRandom();
   });
 
+  // Cancel button inside Storage section to go back to main tags
+document.getElementById('storage-cancel').addEventListener('click', () => {
+  hideAllSections();
+  showAllTags();
+});
+
   // Initialer Datenabruf – Google Sheets oder Fallback auf LocalStorage
   fetch(GAS_URL)
     .then(res => res.json())
