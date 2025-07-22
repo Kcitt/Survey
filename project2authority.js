@@ -177,9 +177,11 @@ document.addEventListener('DOMContentLoaded', () => {
           delBtn.addEventListener('click', () => {
   if (confirm('Delete this entry?')) {
     // Find current index of this entry at click time, instead of closed-over index
-    const currentIndex = storage[type].indexOf(entry);
+   /* const currentIndex = storage[type].indexOf(entry);
     if (currentIndex > -1) {
-      storage[type].splice(currentIndex, 1);
+      storage[type].splice(currentIndex, 1);*/
+    storage[type].splice(index, 1);
+
       saveAllData();
       renderStorage();
       updateVisibleTags();
