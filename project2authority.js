@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
   { key: 'complaints', singular: 'complaint' },
   { key: 'requests', singular: 'request' },
   { key: 'compliments', singular: 'compliment' }
-];
+]};
 
 types.forEach(({ key, singular }) => {
   const entries = storage[key];
@@ -337,25 +337,3 @@ document.getElementById('storage-cancel').addEventListener('click', () => {
   hideAllSections();
   showAllTags();
 });
-
-  /* Initialer Datenabruf – Google Sheets oder Fallback auf LocalStorage
-  fetch(GAS_URL)
-    .then(res => res.json())
-    .then(data => {
-      complaints = data.complaints || [];
-      requests = data.requests || [];
-      compliments = data.compliments || [];
-      updateVisibleTags();
-      updateCounts();
-    })
-    .catch(err => {
-      // Bei Fehlern: Lokale Daten nutzen
-      console.warn('Fallback to localStorage due to error:', err);
-      complaints = savedDataBackup.complaints.length ? savedDataBackup.complaints : ['Complaint example #1'];
-      requests = savedDataBackup.requests.length ? savedDataBackup.requests : ['Request example #1'];
-      compliments = savedDataBackup.compliments.length ? savedDataBackup.compliments : ['Compliment example #1'];
-      updateVisibleTags();
-      updateCounts();
-    });
-
-});*/
