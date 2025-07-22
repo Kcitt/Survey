@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const ul = document.createElement('ul');
         entries.forEach((entry, index) => {
           const li = document.createElement('li');
-          li.textContent = entry;
+        li.appendChild(document.createTextNode(entry));
 
           const delBtn = document.createElement('button');
           delBtn.textContent = 'Delete';
