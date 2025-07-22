@@ -155,11 +155,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('.storage-content');
     container.innerHTML = '';
 
-    const types = ['complaints', 'requests', 'compliments'];
-    types.forEach(type => {
-      const entries = storage[type];
-      const label = type.charAt(0).toUpperCase() + type.slice(1);
-      container.innerHTML += `<h3>${label} (${entries.length})</h3>`;
+   const types = [
+  { key: 'complaints', singular: 'complaint' },
+  { key: 'requests', singular: 'request' },
+  { key: 'compliments', singular: 'compliment' }
+];
+
+types.forEach(({ key, singular }) => {
+  const entries = storage[key];
+  const label = key.charAt(0).toUpperCase() + key.slice(1);
+  container.innerHTML += `<h3>${label} (${entries.length})</h3>`;
 
       if (entries.length === 0) {
         container.innerHTML += '<p>None.</p>';
