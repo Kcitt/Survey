@@ -115,9 +115,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (list.length === 0) {
       // Wenn keine Einträge mehr vorhanden sind
       container.innerHTML = `
-        <p>No more ${type}s.</p>
-        <button class="a-cancel">Cancel</button>
-      `;
+  <div class="entry-display">${item}</div>
+  <button class="a-storage">Put into Storage</button>
+  <button class="a-next">Next ${type}</button>
+  <button class="a-cancel">Cancel</button>
+`;
+
       container.querySelector('.a-cancel').addEventListener('click', () => {
         hideAllSections();
         showAllTags();
