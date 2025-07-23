@@ -1,13 +1,13 @@
+// Arrays zur Speicherung aktueller Beiträge aus Google Sheets
+  let complaints = [];
+  let requests = [];
+  let compliments = [];
+
 // Sobald das DOM vollständig geladen ist, wird dieser Code ausgeführt
 document.addEventListener('DOMContentLoaded', () => {
 
   // URL zum Google Apps Script für das Speichern von Daten
   const GAS_URL = 'https://script.google.com/macros/s/AKfycbwQ40mXjUopVaPV_GvFkVks_NGgniKjvOQ9JwXg2tGWaC6mAnl7YrUSTusmDbM2tPvJ/exec';
-
-  // Arrays zur Speicherung aktueller Beiträge aus Google Sheets
-  let complaints = [];
-  let requests = [];
-  let compliments = [];
   
 // 1. Load data first
   fetch(GAS_URL)
