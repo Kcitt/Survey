@@ -205,14 +205,14 @@ document.addEventListener('DOMContentLoaded', () => {
         delBtn.style.marginLeft = '10px';
 
         delBtn.addEventListener('click', () => {
-          if (confirm('Delete this entry?')) {
-            storage[key].splice(index, 1);
-            saveAllData();
-            renderStorage();
-            updateVisibleTags();
-            updateCounts();
-          }
-        });
+  if (confirm('Delete this entry?')) {
+    storage[key] = storage[key].filter(e => e !== entry);
+    saveAllData();
+    renderStorage();
+    updateVisibleTags();
+    updateCounts();
+  }
+});
 
         li.appendChild(delBtn);
         ul.appendChild(li);
