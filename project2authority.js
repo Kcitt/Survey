@@ -177,51 +177,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Zeigt alle gespeicherten Beiträge im Storage an
   function renderStorage() {
-    const container = document.querySelector('.storage-content');
-    container.innerHTML = '';
+  const container = document.querySelector('.storage-content');
+  container.innerHTML = '';
 
-   const types = [
-  { key: 'complaints', singular: 'complaint' },
-  { key: 'requests', singular: 'request' },
-  { key: 'compliments', singular: 'compliment' }
-]};
+  const types = [
+    { key: 'complaints', singular: 'complaint' },
+    { key: 'requests', singular: 'request' },
+    { key: 'compliments', singular: 'compliment' }
+  ];
 
-types.forEach(({ key, singular }) => {
-  const entries = storage[key];
-  const label = key.charAt(0).toUpperCase() + key.slice(1);
-  container.innerHTML += `<h3>${label} (${entries.length})</h3>`;
+  types.forEach(({ key, singular }) => {
+    const entries = storage[key];
+    const label = key.charAt(0).toUpperCase() + key.slice(1);
+    container.innerHTML += `<h3>${label} (${entries.length})</h3>`;
 
-  if (entries.length === 0) {
-    container.innerHTML += '<p>None.</p>';
-  } else {
-    const ul = document.createElement('ul');
+    if (entries.length === 0) {
+      container.innerHTML += '<p>None.</p>';
+    } else {
+      const ul = document.createElement('ul');
 
-    entries.forEach((entry, index) => {
-      const li = document.createElement('li');
-      li.appendChild(document.createTextNode(entry));
+      entries.forEach((entry, index) => {
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(entry));
 
-      const delBtn = document.createElement('button');
-      delBtn.textContent = 'Delete';
-      delBtn.style.marginLeft = '10px';
+        const delBtn = document.createElement('button');
+        delBtn.textContent = 'Delete';
+        delBtn.style.marginLeft = '10px';
 
-      // Löscht einen Eintrag nach Bestätigung
-      delBtn.addEventListener('click', () => {
-        if (confirm('Delete this entry?')) {
-          storage[key].splice(index, 1);
-          saveAllData();
-          renderStorage();
-          updateVisibleTags();
-          updateCounts();
-        }
+        delBtn.addEventListener('click', () => {
+          if (confirm('Delete this entry?')) {
+            storage[key].splice(index, 1);
+            saveAllData();
+            renderStorage();
+            updateVisibleTags();
+            updateCounts();
+          }
+        });
+
+        li.appendChild(delBtn);
+        ul.appendChild(li);
       });
 
-      li.appendChild(delBtn);
-      ul.appendChild(li);
-    });
-
-    container.appendChild(ul);
-  }
-});
+      container.appendChild(ul);
+    }
+  });
+}
 
 
   // Zeigt zufällige Beiträge aus allen Kategorien an
