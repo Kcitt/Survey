@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
       hideAllSections();
       showAllTags();
     });
-  }
+  
 
   // Zeigt alle gespeicherten Beiträge im Storage an
   function renderStorage() {
